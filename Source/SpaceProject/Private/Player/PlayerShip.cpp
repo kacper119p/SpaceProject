@@ -50,8 +50,8 @@ void APlayerShip::OnMouseMove(const FInputActionValue& Value)
 	const FVector2d Input = Value.Get<FVector2d>();
 	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Emerald,
 	                                 FString::Printf(TEXT("Input: %lf %lf"), Input.X, Input.Y));
-
-	CameraContainerComponent->AddRelativeRotation(FRotator(Input.Y, Input.X, 0.0));
+	
+	CameraContainerComponent->AddLocalRotation(FRotator(Input.Y, Input.X, 0.0));
 }
 
 void APlayerShip::BeginPlay()
