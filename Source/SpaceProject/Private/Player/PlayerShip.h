@@ -1,13 +1,18 @@
 // Copyright © Kacper Pastuszka 2023 All rights reserved.
 
 #pragma once
+#include "InputActionValue.h"
 
-#include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
-#include "InputAction.h"
-#include "InputMappingContext.h"
-#include "GameFramework/MovementComponent.h"
 #include "PlayerShip.generated.h"
+
+struct FInputActionValue;
+class UInputAction;
+class UInputComponent;
+class UInputMappingContext;
+class USpringArmComponent;
+class UCameraComponent;
+class UStaticMeshComponent;
+class UPhysicsConstraintComponent;
 
 UCLASS()
 class APlayerShip : public APawn
@@ -21,22 +26,26 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
 	UInputAction* MoveAction;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-	UMovementComponent* MovementComponent;
-	
-	UPROPERTY(EditAnywhere, Category = "Camera")
-	class USpringArmComponent* SpringArmComponent;
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* MouseMoveAction;
 
-	UPROPERTY(EditAnywhere, Category = "Camera")
-	class UCameraComponent* CameraComponent;
+	UPROPERTY(EditAnywhere)
+	USceneComponent* CameraContainerComponent;
 
-	UPROPERTY(EditAnywhere, Category = "Mesh")
+	UPROPERTY(EditAnywhere)
+	USpringArmComponent* SpringArmComponent;
+
+	UPROPERTY(EditAnywhere)
+	UCameraComponent* CameraComponent;
+
+	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* MeshComponent;
+
 private:
 	FVector MoveDirection;
-	
-protected:
-	void Move(const FInputActionValue& Value);
+
+	void OnMove(const FInputActionValue& Value);
+	void OnMouseMove(const FInputActionValue& Value);
 
 public:
 	APlayerShip();
@@ -46,6 +55,6 @@ protected:
 
 public:
 	virtual void Tick(float DeltaTime) override;
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	virtual void PawnClientRestart() override;
 };
