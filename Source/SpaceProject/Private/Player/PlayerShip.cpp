@@ -12,7 +12,6 @@
 #include "InputAction.h"
 #include "VectorTypes.h"
 
-
 APlayerShip::APlayerShip()
 {
 	PrimaryActorTick.bCanEverTick = true;
