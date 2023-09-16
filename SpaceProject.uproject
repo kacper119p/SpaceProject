@@ -7,6 +7,14 @@
 		{
 			"Name": "SpaceProject",
 			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
+		},
+		{
+			"Name": "Utility",
+			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}
 	],
