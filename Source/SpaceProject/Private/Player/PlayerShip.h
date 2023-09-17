@@ -5,6 +5,8 @@
 
 #include "PlayerShip.generated.h"
 
+class USpaceShipMovement;
+class UPlayerCameraContainer;
 struct FInputActionValue;
 class UInputAction;
 class UInputComponent;
@@ -18,34 +20,24 @@ UCLASS()
 class APlayerShip : public APawn
 {
 	GENERATED_BODY()
-
+private:
+	FRotator OldCameraRotation;
+	
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
-	UInputMappingContext* InputMappingContext;
+	UPROPERTY(EditAnywhere, Category = "Camera")
+	UPlayerCameraContainer* CameraContainerComponent;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
-	UInputAction* MoveAction;
-
-	UPROPERTY(EditAnywhere, Category = "Input")
-	UInputAction* MouseMoveAction;
-
-	UPROPERTY(EditAnywhere)
-	USceneComponent* CameraContainerComponent;
-
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Camera")
 	USpringArmComponent* SpringArmComponent;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Camera")
 	UCameraComponent* CameraComponent;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Mesh")
 	UStaticMeshComponent* MeshComponent;
 
-private:
-	FVector MoveDirection;
-
-	void OnMove(const FInputActionValue& Value);
-	void OnMouseMove(const FInputActionValue& Value);
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	USpaceShipMovement* ShipMovementComponent;
 
 public:
 	APlayerShip();
@@ -55,6 +47,5 @@ protected:
 
 public:
 	virtual void Tick(float DeltaTime) override;
-	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
-	virtual void PawnClientRestart() override;
+	USceneComponent* GetCameraContainer() const;
 };
