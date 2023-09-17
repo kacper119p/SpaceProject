@@ -5,6 +5,8 @@
 
 #include "PlayerShip.generated.h"
 
+class USpaceShipMovement;
+class UPlayerCameraContainer;
 struct FInputActionValue;
 class UInputAction;
 class UInputComponent;
@@ -18,19 +20,24 @@ UCLASS()
 class APlayerShip : public APawn
 {
 	GENERATED_BODY()
-
+private:
+	FRotator OldCameraRotation;
+	
 protected:
-	UPROPERTY(EditAnywhere)
-	USceneComponent* CameraContainerComponent;
+	UPROPERTY(EditAnywhere, Category = "Camera")
+	UPlayerCameraContainer* CameraContainerComponent;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Camera")
 	USpringArmComponent* SpringArmComponent;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Camera")
 	UCameraComponent* CameraComponent;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Mesh")
 	UStaticMeshComponent* MeshComponent;
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	USpaceShipMovement* ShipMovementComponent;
 
 public:
 	APlayerShip();
