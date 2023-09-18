@@ -11,6 +11,7 @@ class USpaceShipController : public UInterface
 class ISpaceShipController
 {
 	GENERATED_BODY()
+
 public:
 	virtual float GetThrust() const = 0;
 	virtual FRotator GetRotation() const = 0;

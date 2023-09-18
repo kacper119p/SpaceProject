@@ -20,9 +20,7 @@ UCLASS()
 class APlayerShip : public APawn
 {
 	GENERATED_BODY()
-private:
-	FRotator OldCameraRotation;
-	
+
 protected:
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	UPlayerCameraContainer* CameraContainerComponent;
@@ -39,13 +37,14 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	USpaceShipMovement* ShipMovementComponent;
 
+private:
+	FRotator OldCameraRotation;
+
 public:
 	APlayerShip();
 
+	USceneComponent* GetCameraContainer() const;
+
 protected:
 	virtual void BeginPlay() override;
-
-public:
-	virtual void Tick(float DeltaTime) override;
-	USceneComponent* GetCameraContainer() const;
 };
