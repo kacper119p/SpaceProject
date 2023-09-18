@@ -30,13 +30,11 @@ protected:
 public:
 	USpaceShipMovement();
 
-protected:
-	virtual void BeginPlay() override;
-
-public:
 	void Attach(UPrimitiveComponent* InControlled);
 	void SetController(ISpaceShipController* InController);
 
+protected:
+	virtual void BeginPlay() override;
 	virtual void TickComponent
 	(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 

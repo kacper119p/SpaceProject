@@ -37,6 +37,11 @@ APlayerShip::APlayerShip()
 	OldCameraRotation = CameraComponent->GetRelativeRotation();
 }
 
+USceneComponent* APlayerShip::GetCameraContainer() const
+{
+	return CameraContainerComponent;
+}
+
 void APlayerShip::BeginPlay()
 {
 	Super::BeginPlay();
@@ -46,9 +51,4 @@ void APlayerShip::BeginPlay()
 void APlayerShip::Tick(const float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-}
-
-USceneComponent* APlayerShip::GetCameraContainer() const
-{
-	return CameraContainerComponent;
 }

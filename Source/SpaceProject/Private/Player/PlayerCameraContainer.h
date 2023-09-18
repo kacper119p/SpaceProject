@@ -11,15 +11,18 @@ UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class SPACEPROJECT_API UPlayerCameraContainer : public USceneComponent
 {
 	GENERATED_BODY()
+
 protected:
 	UPROPERTY(BlueprintReadOnly)
 	USceneComponent* Followed;
+
 public:
 	UPlayerCameraContainer();
 
-public:
 	void Attach(USceneComponent* ToFollow);
 	USceneComponent* GetFollowed() const;
+
+protected:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 };
