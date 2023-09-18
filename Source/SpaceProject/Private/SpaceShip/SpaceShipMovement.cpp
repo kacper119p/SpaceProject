@@ -47,9 +47,7 @@ void USpaceShipMovement
 ::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	const ISpaceShipController* ShipController = Cast<ISpaceShipController>(Controller.GetObject());
-
+	
 	HandleThrust(Controller->GetThrust());
 	HandleRotation(Controller->GetRotation(), DeltaTime);
 }
