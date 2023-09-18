@@ -47,8 +47,3 @@ void APlayerShip::BeginPlay()
 	Super::BeginPlay();
 	ShipMovementComponent->SetController(CastChecked<APlayerShipController>(Controller));
 }
-
-void APlayerShip::Tick(const float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}
