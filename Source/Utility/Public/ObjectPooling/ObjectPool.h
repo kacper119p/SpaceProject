@@ -3,13 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
-#include "ObjectPoolComponent.generated.h"
+#include "ObjectPool.generated.h"
 
 class APooledActor;
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
-class UTILITY_API UObjectPoolComponent : public UActorComponent
+UCLASS()
+class UTILITY_API UObjectPool : public UObject
 {
 	GENERATED_BODY()
 
@@ -18,9 +17,11 @@ private:
 	TArray<APooledActor*> Stack;
 
 public:
-	UObjectPoolComponent();
+	UObjectPool();
 	
-	void Initialize(APooledActor* Template, int32 Size);
+	TArray<APooledActor*> GetMembers() const;
+	
+	void Initialize(const TSubclassOf<APooledActor> Template, int32 Size);
 	void Dispose();
 	
 	APooledActor* Pull(const FVector& Location,const FRotator& Rotation);

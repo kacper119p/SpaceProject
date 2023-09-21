@@ -9,6 +9,7 @@
 #include "PlayerCameraContainer.h"
 #include "PlayerShipController.h"
 #include "GameFramework/Pawn.h"
+#include "SpaceShip/SpaceShipCannon.h"
 #include "SpaceShip/SpaceShipMovement.h"
 
 APlayerShip::APlayerShip()
@@ -45,5 +46,8 @@ USceneComponent* APlayerShip::GetCameraContainer() const
 void APlayerShip::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	GetComponents<USpaceShipCannon>(Cannons);
+	
 	ShipMovementComponent->SetController(CastChecked<APlayerShipController>(Controller));
 }

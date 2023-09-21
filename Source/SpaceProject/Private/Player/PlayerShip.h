@@ -5,6 +5,7 @@
 
 #include "PlayerShip.generated.h"
 
+class USpaceShipCannon;
 class USpaceShipMovement;
 class UPlayerCameraContainer;
 struct FInputActionValue;
@@ -36,6 +37,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	USpaceShipMovement* ShipMovementComponent;
+
+	UPROPERTY(EditAnywhere, Category = "Weapons")
+	TArray<USpaceShipCannon*> Cannons;
 
 private:
 	FRotator OldCameraRotation;
