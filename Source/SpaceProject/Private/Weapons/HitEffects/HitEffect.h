@@ -12,19 +12,21 @@ class SPACEPROJECT_API AHitEffect : public APooledActor
 {
 	GENERATED_BODY()
 protected:
-	UPROPERTY(EditAnywhere)
-	float Lifespan;
+	UPROPERTY(EditAnywhere, Category = "Life Cycle")
+	float LifeTime = 0;
 	
 private:
-	float Timer;
+	float Timer = 0;
 
 public:
 	AHitEffect();
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 	virtual void Tick(float DeltaTime) override;
 
 private:
+	UFUNCTION()
 	void OnObjectEnabled();
 };

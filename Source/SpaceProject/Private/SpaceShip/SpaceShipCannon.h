@@ -6,6 +6,7 @@
 #include "Components/SceneComponent.h"
 #include "SpaceShipCannon.generated.h"
 
+class ISpaceShipController;
 class IWeapon;
 class UWeapon;
 
@@ -22,9 +23,13 @@ private:
 	UPROPERTY()
 	TScriptInterface<IWeapon> WeaponInstance;
 
+	UPROPERTY()
+	TScriptInterface<ISpaceShipController> Controller;
+
 public:
 	USpaceShipCannon();
 
+	void SetController(ISpaceShipController * InController);
 	void Shoot();
 
 protected:

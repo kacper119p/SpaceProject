@@ -37,8 +37,7 @@ void UProjectileWeapon::BeginPlay()
 
 	ProjectilePool = NewObject<UObjectPool>(this);
 	HitEffectPool = NewObject<UObjectPool>(this);
-	
-	
+
 	ProjectilePool->Initialize(Projectile, ProjectilePoolSize);
 	HitEffectPool->Initialize(HitEffect, HitEffectPoolSize);
 

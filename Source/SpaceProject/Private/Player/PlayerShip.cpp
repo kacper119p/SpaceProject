@@ -48,6 +48,11 @@ void APlayerShip::BeginPlay()
 	Super::BeginPlay();
 	
 	GetComponents<USpaceShipCannon>(Cannons);
+
+	for (USpaceShipCannon* Cannon : Cannons)
+	{
+		Cannon->SetController(CastChecked<APlayerShipController>(Controller));
+	}
 	
 	ShipMovementComponent->SetController(CastChecked<APlayerShipController>(Controller));
 }

@@ -3,11 +3,17 @@
 
 #include "SpaceShipCannon.h"
 
+#include "SpaceShipController.h"
 #include "Weapons/Weapon.h"
 
 USpaceShipCannon::USpaceShipCannon()
 {
 	PrimaryComponentTick.bCanEverTick = true;
+}
+
+void USpaceShipCannon::SetController(ISpaceShipController* InController)
+{
+		Controller = CastChecked<UObject>(InController);
 }
 
 void USpaceShipCannon::Shoot()
@@ -37,4 +43,8 @@ void USpaceShipCannon::TickComponent(float DeltaTime, ELevelTick TickType,
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	WeaponInstance->Tick(DeltaTime);
+	if(Controller->IsShooting())
+	{
+		Shoot();
+	}
 }

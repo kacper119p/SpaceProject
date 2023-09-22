@@ -12,7 +12,13 @@ AHitEffect::AHitEffect()
 void AHitEffect::BeginPlay()
 {
 	Super::BeginPlay();
-	//OnEnabledEvent.AddDynamic(this, &AHitEffect::OnObjectEnabled);
+	OnEnabledEvent.AddDynamic(this, &AHitEffect::OnObjectEnabled);
+}
+
+void AHitEffect::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+	OnEnabledEvent.RemoveDynamic(this, &AHitEffect::OnObjectEnabled);
 }
 
 void AHitEffect::Tick(float DeltaTime)
@@ -20,7 +26,7 @@ void AHitEffect::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	Timer += DeltaTime;
 
-	if (Timer > Lifespan)
+	if (Timer > LifeTime)
 	{
 		Return();
 	}

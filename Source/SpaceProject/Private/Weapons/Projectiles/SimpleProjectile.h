@@ -26,7 +26,9 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	UProjectileMovementComponent* ProjectileMovement;
-
+	
+private:
+	float Timer;
 public:
 	ASimpleProjectile();
 
@@ -41,6 +43,6 @@ private:
 	           UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 	UFUNCTION()
 	void OnObjectEnabled();
-
-	float Timer;
+	UFUNCTION()
+	void OnObjectDisabled();
 };

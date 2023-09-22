@@ -40,7 +40,4 @@ public:
 	void SetActive(bool bActive);
 	bool IsActive() const;
 	void Return();
-
-	FOnEnabledSignature* OnEnabled();
-	FOnDisabledSignature* OnDisabled();
 };

@@ -6,7 +6,6 @@
 
 APooledActor::APooledActor()
 {
-	SetActive(true);
 }
 
 void APooledActor::Initialize(UObjectPool* InPool)
@@ -27,9 +26,10 @@ void APooledActor::Disable()
 void APooledActor::SetActive(const bool bActive)
 {
 	bIsActive = bActive;
-	SetHidden(!bActive);
+	SetActorHiddenInGame(!bActive);
 	SetActorEnableCollision(bActive);
 	SetActorTickEnabled(bActive);
+	
 	if(bActive)
 	{
 		OnEnabledEvent.Broadcast();
@@ -47,15 +47,6 @@ bool APooledActor::IsActive() const
 
 void APooledActor::Return()
 {
+	SetActive(false);
 	ObjectPool->Return(this);
-}
-
-APooledActor::FOnEnabledSignature* APooledActor::OnEnabled()
-{
-	return &OnEnabledEvent;
-}
-
-APooledActor::FOnDisabledSignature* APooledActor::OnDisabled()
-{
-	return &OnDisabledEvent;
 }

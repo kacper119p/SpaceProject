@@ -25,12 +25,14 @@ void UObjectPool::Initialize(const TSubclassOf<APooledActor> Template, const int
 		APooledActor* Created = CastChecked<APooledActor>(Actor);
 		Created->Initialize(this);
 		Members.Push(Created);
-		Stack.Push(Created);
+		Created->Return();
 	}
 }
 
 void UObjectPool::Dispose()
 {
+	GEngine
+		->AddOnScreenDebugMessage(-1, 5, FColor::Green, FString::Printf(TEXT("ggdgadgad")));
 	for (APooledActor* Member : Members)
 	{
 		Member->Destroy();
@@ -39,8 +41,9 @@ void UObjectPool::Dispose()
 
 APooledActor* UObjectPool::Pull(const FVector& Location, const FRotator& Rotation)
 {
-	APooledActor* Pulled = Stack.Pop();
+	APooledActor* Pulled = Stack.Pop(false);
 	Pulled->SetActorLocationAndRotation(Location, Rotation);
+	Pulled->Enable();
 	return Pulled;
 }
 
