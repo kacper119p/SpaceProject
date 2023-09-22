@@ -3,9 +3,16 @@
 
 #include "HitEffect.h"
 
+#include "NiagaraComponent.h"
+
 AHitEffect::AHitEffect()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
+	NiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>("VFX");
+	RootComponent = NiagaraComponent;
+	
+	NiagaraComponent->Deactivate();
 }
 
 
@@ -34,5 +41,6 @@ void AHitEffect::Tick(float DeltaTime)
 
 void AHitEffect::OnObjectEnabled()
 {
+	NiagaraComponent->Activate(true);
 	Timer = 0;
 }

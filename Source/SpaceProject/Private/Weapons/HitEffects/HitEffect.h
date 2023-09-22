@@ -7,6 +7,8 @@
 #include "ObjectPooling/PooledActor.h"
 #include "HitEffect.generated.h"
 
+class UNiagaraComponent;
+
 UCLASS()
 class SPACEPROJECT_API AHitEffect : public APooledActor
 {
@@ -14,6 +16,9 @@ class SPACEPROJECT_API AHitEffect : public APooledActor
 protected:
 	UPROPERTY(EditAnywhere, Category = "Life Cycle")
 	float LifeTime = 0;
+
+	UPROPERTY(EditAnywhere)
+	UNiagaraComponent* NiagaraComponent;
 	
 private:
 	float Timer = 0;

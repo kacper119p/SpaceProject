@@ -41,6 +41,10 @@ void UObjectPool::Dispose()
 
 APooledActor* UObjectPool::Pull(const FVector& Location, const FRotator& Rotation)
 {
+	if(Stack.IsEmpty())
+	{
+		return nullptr;
+	}
 	APooledActor* Pulled = Stack.Pop(false);
 	Pulled->SetActorLocationAndRotation(Location, Rotation);
 	Pulled->Enable();

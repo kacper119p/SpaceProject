@@ -6,8 +6,8 @@
 #include "Weapons/Projectiles/Projectile.h"
 #include "SimpleProjectile.generated.h"
 
+class USphereComponent;
 class UProjectileMovementComponent;
-class UStaticMeshComponent;
 
 UCLASS()
 class SPACEPROJECT_API ASimpleProjectile : public AProjectile
@@ -22,7 +22,7 @@ protected:
 	float LifeSpan;
 
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* MeshComponent;
+	USphereComponent* CollisionComponent;
 
 	UPROPERTY(EditAnywhere)
 	UProjectileMovementComponent* ProjectileMovement;

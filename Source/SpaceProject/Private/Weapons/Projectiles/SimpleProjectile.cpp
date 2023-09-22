@@ -3,20 +3,21 @@
 
 #include "SimpleProjectile.h"
 
+#include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
 ASimpleProjectile::ASimpleProjectile()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>("MeshComponent");
-	RootComponent = MeshComponent;
+	CollisionComponent = CreateDefaultSubobject<USphereComponent>("CollisionComponent");
+	RootComponent = CollisionComponent;
 
-	MeshComponent->SetSimulatePhysics(false);
-	MeshComponent->SetEnableGravity(false);
+	CollisionComponent->SetSimulatePhysics(false);
+	CollisionComponent->SetEnableGravity(false);
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>("MovementComponent");
-	ProjectileMovement->SetUpdatedComponent(MeshComponent);
+	ProjectileMovement->SetUpdatedComponent(CollisionComponent);
 }
 
 void ASimpleProjectile::BeginPlay()
@@ -25,7 +26,7 @@ void ASimpleProjectile::BeginPlay()
 	
 	OnEnabledEvent.AddDynamic(this, &ASimpleProjectile::OnObjectEnabled);
 	OnDisabledEvent.AddDynamic(this, &ASimpleProjectile::OnObjectDisabled);
-	MeshComponent->OnComponentHit.AddDynamic(this, &ASimpleProjectile::OnHit);
+	CollisionComponent->OnComponentHit.AddDynamic(this, &ASimpleProjectile::OnHit);
 }
 
 void ASimpleProjectile::Tick(float DeltaTime)
@@ -44,7 +45,7 @@ void ASimpleProjectile::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	Super::EndPlay(EndPlayReason);
 	OnEnabledEvent.RemoveDynamic(this, &ASimpleProjectile::OnObjectEnabled);
 	OnDisabledEvent.RemoveDynamic(this, &ASimpleProjectile::OnObjectDisabled);
-	MeshComponent->OnComponentHit.RemoveDynamic(this, &ASimpleProjectile::OnHit);
+	CollisionComponent->OnComponentHit.RemoveDynamic(this, &ASimpleProjectile::OnHit);
 }
 
 void ASimpleProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
@@ -57,13 +58,13 @@ void ASimpleProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAc
 void ASimpleProjectile::OnObjectEnabled()
 {
 	Timer = 0;
-	ProjectileMovement->SetUpdatedComponent(MeshComponent);
+	ProjectileMovement->SetUpdatedComponent(CollisionComponent);
 	ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * InitialSpeed);
 }
 
 void ASimpleProjectile::OnObjectDisabled()
 {
 	ProjectileMovement->SetVelocityInLocalSpace(FVector::Zero());
-	MeshComponent->SetPhysicsLinearVelocity(FVector::Zero());
-	MeshComponent->SetPhysicsAngularVelocityInDegrees(FVector::Zero());
+	CollisionComponent->SetPhysicsLinearVelocity(FVector::Zero());
+	CollisionComponent->SetPhysicsAngularVelocityInDegrees(FVector::Zero());
 }

@@ -6,6 +6,7 @@
 #include "Components/SceneComponent.h"
 #include "SpaceShipCannon.generated.h"
 
+class UNiagaraComponent;
 class ISpaceShipController;
 class IWeapon;
 class UWeapon;
@@ -19,6 +20,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Weapons", meta = (MustImplement = Weapon))
 	UClass* Weapon;
 
+	UPROPERTY(EditAnywhere, Category = "Weapons")
+	UNiagaraComponent* MuzzleEffectEmitter;
+
 private:
 	UPROPERTY()
 	TScriptInterface<IWeapon> WeaponInstance;
@@ -31,6 +35,7 @@ public:
 
 	void SetController(ISpaceShipController * InController);
 	void Shoot();
+	UNiagaraComponent* GetMuzzleEffectEmitter() const;
 
 protected:
 	virtual void BeginPlay() override;

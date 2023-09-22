@@ -13,7 +13,9 @@ class UTILITY_API UObjectPool : public UObject
 	GENERATED_BODY()
 
 private:
+	UPROPERTY()
 	TArray<APooledActor*> Members;
+	UPROPERTY()
 	TArray<APooledActor*> Stack;
 
 public:

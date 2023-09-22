@@ -9,12 +9,15 @@
 
 UProjectileWeapon::UProjectileWeapon()
 {
-	MuzzleEffect = CreateDefaultSubobject<UNiagaraComponent>("MuzzleEffect");
 }
 
 void UProjectileWeapon::Initialize(USpaceShipCannon* Owner)
 {
 	Cannon = Owner;
+	UNiagaraComponent* Emitter = Cannon->GetMuzzleEffectEmitter();
+	Emitter->SetAsset(MuzzleEffect);
+	Emitter->Deactivate();
+	
 }
 
 void UProjectileWeapon::Tick(float const DeltaTime)
@@ -26,6 +29,7 @@ void UProjectileWeapon::Shoot()
 {
 	if (Timer >= Cooldown)
 	{
+		Cannon->GetMuzzleEffectEmitter()->Activate(true);
 		ProjectilePool->Pull(Cannon->GetComponentLocation(), Cannon->GetComponentRotation());
 		Timer = 0;
 	}

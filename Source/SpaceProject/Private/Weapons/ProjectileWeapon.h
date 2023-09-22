@@ -8,14 +8,13 @@
 #include "ProjectileWeapon.generated.h"
 
 
+class UNiagaraSystem;
 class APooledActor;
 class AProjectile;
-class UNiagaraComponent;
 class UObjectPool;
 class IProjectile;
-/**
- * 
- */
+
+
 UCLASS(Blueprintable)
 class SPACEPROJECT_API UProjectileWeapon : public UObject, public IWeapon
 {
@@ -38,7 +37,7 @@ protected:
 	float Cooldown = 1.0f;
 
 	UPROPERTY(EditAnywhere)
-	UNiagaraComponent* MuzzleEffect;
+	UNiagaraSystem* MuzzleEffect;
 
 	UPROPERTY()
 	USpaceShipCannon* Cannon;
