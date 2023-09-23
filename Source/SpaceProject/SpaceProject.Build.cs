@@ -9,9 +9,9 @@ public class SpaceProject : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
 		PublicDependencyModuleNames.AddRange(new string[]
-			{ "Core", "CoreUObject", "Engine"  });
+			{ "Core", "CoreUObject", "Engine" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] {"InputCore", "EnhancedInput", "Utility" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "InputCore", "EnhancedInput", "Utility", "Niagara" });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
