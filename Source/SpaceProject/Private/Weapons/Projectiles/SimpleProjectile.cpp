@@ -34,7 +34,7 @@ void ASimpleProjectile::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	Timer += DeltaTime;
 
-	if (Timer >= LifeSpan)
+	if (Timer >= LifeTime)
 	{
 		Return();
 	}
@@ -59,7 +59,7 @@ void ASimpleProjectile::OnObjectEnabled()
 {
 	Timer = 0;
 	ProjectileMovement->SetUpdatedComponent(CollisionComponent);
-	ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * InitialSpeed);
+	ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * ProjectileMovement->InitialSpeed);
 }
 
 void ASimpleProjectile::OnObjectDisabled()

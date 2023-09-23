@@ -16,10 +16,7 @@ class SPACEPROJECT_API ASimpleProjectile : public AProjectile
 
 protected:
 	UPROPERTY(EditAnywhere, Category = "Characteristics")
-	float InitialSpeed;
-
-	UPROPERTY(EditAnywhere, Category = "Characteristics")
-	float LifeSpan;
+	float LifeTime;
 
 	UPROPERTY(EditAnywhere)
 	USphereComponent* CollisionComponent;
