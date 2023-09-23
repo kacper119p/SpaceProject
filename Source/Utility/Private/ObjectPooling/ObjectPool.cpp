@@ -31,8 +31,6 @@ void UObjectPool::Initialize(const TSubclassOf<APooledActor> Template, const int
 
 void UObjectPool::Dispose()
 {
-	GEngine
-		->AddOnScreenDebugMessage(-1, 5, FColor::Green, FString::Printf(TEXT("ggdgadgad")));
 	for (APooledActor* Member : Members)
 	{
 		Member->Destroy();
