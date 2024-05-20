@@ -2,6 +2,7 @@
 
 
 #include "Movement/RandomRotation.h"
+#include "Kismet/KismetMathLibrary.h"
 
 
 URandomRotation::URandomRotation()
@@ -25,14 +26,13 @@ void URandomRotation::BeginPlay()
 
 	RotationVector = RotationVector.GetSafeNormal();
 
-	Rotation = FRotator(FQuat
-		(RotationVector, FMath::DegreesToRadians(FMath::RandRange(MinRotationSpeed, MaxRotationSpeed))));
+	Rotation = UKismetMathLibrary::RotatorFromAxisAndAngle(
+		RotationVector, FMath::RandRange(MinRotationSpeed, MaxRotationSpeed));
 }
 
 
 void URandomRotation::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
 	GetOwner()->AddActorWorldRotation(Rotation * DeltaTime);
 }
