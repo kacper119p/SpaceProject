@@ -20,9 +20,9 @@ void URandomRotation::BeginPlay()
 	Super::BeginPlay();
 
 	FVector RotationVector
-		= FVector(FMath::RandRange(0.0f, 1.0f),
-		          FMath::RandRange(0.0f, 1.0f),
-		          FMath::RandRange(0.0f, 1.0f));
+		= FVector(FMath::RandRange(-1.0f, 1.0f),
+		          FMath::RandRange(-1.0f, 1.0f),
+		          FMath::RandRange(-1.0f, 1.0f));
 
 	RotationVector = RotationVector.GetSafeNormal();
 
